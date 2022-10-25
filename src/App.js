@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Nav from "./components/Nav";
+import soap from "./data/soap";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav />
+      <ul className="flowerlist">
+        {soap.map((element) => {
+          return (
+            <li className="flower">
+              <h3>{element.name}</h3>
+              <p>{element.ingredients}</p>
+              <p>${Number.parseFloat(element.price).toFixed(2)}</p>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
