@@ -1,23 +1,23 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import Nav from "./components/Nav";
+import CartContext from "./context";
+import Soaps from "./components/Soaps";
 import soap from "./data/soap";
+import TemporaryDrawer from "./components/Drawer";
 
 function App() {
+  const [cart, setCart] = useState([]);
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="App">
-      <Nav />
-      <ul className="flowerlist">
-        {soap.map((element) => {
-          return (
-            <li className="flower">
-              <h3>{element.name}</h3>
-              <p>{element.ingredients}</p>
-              <p>${Number.parseFloat(element.price).toFixed(2)}</p>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <CartContext.Provider value={{ cart, setCart, open, setOpen }}>
+      <div className="App">
+        <Nav />
+        <Soaps />
+        <TemporaryDrawer />
+      </div>
+    </CartContext.Provider>
   );
 }
 

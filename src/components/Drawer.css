@@ -1,0 +1,14 @@
+
+
+.cartlist{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+.cartitem{
+    border-bottom: 1px solid grey;
+    margin-right: 30px;
+}
