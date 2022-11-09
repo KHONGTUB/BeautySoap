@@ -5,13 +5,34 @@
 }
 
 .flower{
+    display: flex;
+    flex-direction: column;
     border-radius: 3%;
     padding: 15px;
     border: solid rgba(250, 128, 114, .4) 5px;
     /* box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.3); */
     transition: all .5s ease-in-out;
+    align-items: center;
 }
 
 .flowerlist li:hover{
     border: solid salmon 5px;
+}
+
+
+.addbutton{
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: large;
+    border: 0;
+    background-color: rgba(250, 128, 114, .4);
+    transition: all .5s ease-in-out;
+    border-radius: 5%;
+}
+
+.addbutton:hover{
+    background: salmon;
+    color: white;
+
 }

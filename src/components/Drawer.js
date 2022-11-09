@@ -7,6 +7,13 @@ export default function TemporaryDrawer() {
   const [subtotal, setSubtotal] = useState(0);
   const { cart, open, setOpen } = useContext(CartContext);
 
+  useEffect(() => {
+    console.log(cart);
+    if (cart.length > 0) {
+      setSubtotal(subtotal + cart[cart.length - 1].product.price);
+    }
+  }, [cart]);
+
   const [state, setState] = useState({
     right: false,
   });
@@ -22,8 +29,18 @@ export default function TemporaryDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  const updateTotal = (e, price) => {
-    console.log(e.target.value);
+  const changeQuantity = (e, { product }) => {
+    let index = cart.findIndex((obj) => obj.product.name === product.name);
+
+    if (e.target.id === "+") {
+      cart[index].quantity = cart[index].quantity + 1;
+      setSubtotal(subtotal + product.price);
+    }
+    if (e.target.id === "-") {
+      cart[index].quantity = cart[index].quantity - 1;
+      setSubtotal(subtotal - product.price);
+    }
+    TemporaryDrawer.forceUpdate();
   };
 
   return (
@@ -46,7 +63,7 @@ export default function TemporaryDrawer() {
                 return (
                   <li className="cartitem">
                     <img
-                      src={element.image}
+                      src={element.product.image}
                       alt="soap"
                       style={{ width: 200, height: "auto" }}
                     ></img>
@@ -57,8 +74,8 @@ export default function TemporaryDrawer() {
                         alignItems: "center",
                       }}
                     >
-                      <h3>{element.name}</h3>
-                      <p>${element.price}.00</p>
+                      <h3>{element.product.name}</h3>
+                      <p>${element.product.price}.00</p>
                     </div>
                     <div
                       style={{
@@ -68,16 +85,38 @@ export default function TemporaryDrawer() {
                       }}
                     >
                       <p>Quantity:</p>
-                      <input
-                        onChange={updateTotal(element.price)}
-                        style={{ height: 25, width: 30 }}
-                        defaultValue={1}
+                      <button
+                        onClick={(e) => changeQuantity(e, element)}
+                        id="-"
+                      >
+                        -
+                      </button>
+                      <div
+                        id={element.product.name}
+                        style={{ height: 25, width: 15 }}
                         type="number"
-                      ></input>
+                      >
+                        {element.quantity}
+                      </div>
+                      <button
+                        onClick={(e) => changeQuantity(e, element)}
+                        id="+"
+                      >
+                        +
+                      </button>
                     </div>
                   </li>
                 );
               })}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "right",
+                  marginRight: 25,
+                }}
+              >
+                subtotal: ${subtotal}.00
+              </div>
             </ul>
           </div>
         )}

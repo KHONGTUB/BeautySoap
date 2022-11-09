@@ -1,0 +1,36 @@
+.selectors{
+    margin-top: 20px;
+    display: flex;
+    justify-content:space-evenly;
+}
+
+.scrubs{
+    display: flex;
+    gap: 10px;
+}
+
+.scent{
+    display: flex;
+    gap: 10px;
+}
+
+.nonactive{
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: large;
+    border: 0;
+    background-color: rgba(250, 128, 114, .4);
+    transition: all .5s ease-in-out;
+}
+
+.active{
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: large;
+    border: 0;
+    background: salmon;
+    color: white;
+
+}

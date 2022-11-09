@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import CartContext from "../context";
 
 function Soap(props) {
   const { name, image, ingredients, price } = props.element;
+  const [add, setAdded] = useState(false);
 
   const cart = useContext(CartContext);
   return (
@@ -11,13 +12,33 @@ function Soap(props) {
       <img style={{ width: 300, height: "auto" }} src={image} alt="soap"></img>
       <p>{ingredients}</p>
       <p>${Number.parseFloat(price).toFixed(2)}</p>
-      <button
-        onClick={() => {
-          cart.setCart([...cart.cart, props.element]);
-        }}
-      >
-        Add to Cart
-      </button>
+      {add === false ? (
+        <button
+          className="addbutton"
+          onClick={() => {
+            cart.setCart([
+              ...cart.cart,
+              {
+                product: props.element,
+                quantity: 1,
+              },
+            ]);
+            setAdded(true);
+            console.log(cart.cart[0]);
+          }}
+        >
+          Add to Cart
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            console.log(cart.cart[0].product === props.element);
+          }}
+          className="addbutton"
+        >
+          Added!
+        </button>
+      )}
     </li>
   );
 }
